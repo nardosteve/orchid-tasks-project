@@ -17,7 +17,7 @@ class PostListLayout extends Table
      *
      * @var string
      */
-    protected $target = '';
+    protected $target = 'posts';
 
     /**
      * Get the table cells to be displayed.
@@ -27,14 +27,14 @@ class PostListLayout extends Table
     protected function columns(): iterable
     {
         return [
-            // TD::make('title', 'Title')
-            //     ->render(function (Post $post) {
-            //         return Link::make($post->title)
-            //             ->route('platform.post.edit', $post);
-            //     }),
+            TD::make('title', 'Title')
+                ->render(function (Post $post) {
+                    return Link::make($post->title)
+                        ->route('platform.post.edit', $post);
+                }),
 
-            // TD::make('created_at', 'Created'),
-            // TD::make('updated_at', 'Last edit'),
+            TD::make('created_at', 'Created'),
+            TD::make('updated_at', 'Last edit'),
         ];
     }
 }

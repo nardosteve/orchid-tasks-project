@@ -10,6 +10,8 @@ use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\Post\PostEditScreen;
+use App\Orchid\Screens\Post\PostListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -106,3 +108,8 @@ Route::screen('task', TaskScreen::class)
             ->parent('platform.index')
             ->push('Task');
     });
+
+//Blog
+Route::screen('post/{post?}', PostEditScreen::class)->name('platform.post.edit');//edit by id
+Route::screen('/posts', PostListScreen::class)->name('platform.post.list'); //listing all posts in the db
+//Blog

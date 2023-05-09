@@ -12,6 +12,7 @@ use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Fields\Cropper;
 use Orchid\Support\Facades\Alert;
 
 class PostEditScreen extends Screen
@@ -82,6 +83,11 @@ class PostEditScreen extends Screen
                     ->title('Title')
                     ->placeholder('Attractive but mysterious title')
                     ->help('Specify a short descriptive title for this post.'),
+
+                Cropper::make('post.hero')
+                    ->title('Large web banner image, generally in the front and center')
+                    ->width(1000)
+                    ->height(500),
 
                 TextArea::make('post.description')
                     ->title('Description')

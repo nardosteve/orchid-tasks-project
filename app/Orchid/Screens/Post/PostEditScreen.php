@@ -13,6 +13,7 @@ use Orchid\Screen\Fields\TextArea;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Cropper;
+use Orchid\Screen\Fields\Upload;
 use Orchid\Support\Facades\Alert;
 
 class PostEditScreen extends Screen
@@ -25,6 +26,8 @@ class PostEditScreen extends Screen
      */
     public function query(Post $post): iterable
     {
+        $post->load('attachment');
+
         return [
             'post' => $post
         ];
@@ -78,6 +81,7 @@ class PostEditScreen extends Screen
     public function layout(): iterable
     {
         return [
+            //Form
             Layout::rows([
                 Input::make('post.title')
                     ->title('Title')
@@ -85,6 +89,7 @@ class PostEditScreen extends Screen
                     ->help('Specify a short descriptive title for this post.'),
 
                 Cropper::make('post.hero')
+                    ->targetId()
                     ->title('Large web banner image, generally in the front and center')
                     ->width(1000)
                     ->height(500),
@@ -102,6 +107,9 @@ class PostEditScreen extends Screen
                 Quill::make('post.body')
                     ->title('Main text'),
 
+                Upload::make('post.attachment')
+                    ->title('All files')
+
             ])
         ];
     }
@@ -115,6 +123,10 @@ class PostEditScreen extends Screen
     public function createOrUpdate(Post $post, Request $request)
     {
         $post->fill($request->get('post'))->save();
+
+        $post->attachment()->syncWithoutDetaching(
+            $request->input('post.attachment', [])
+        );
 
         Alert::info('You have successfully created a post.');
 

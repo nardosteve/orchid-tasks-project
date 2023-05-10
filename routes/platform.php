@@ -109,7 +109,7 @@ Route::screen('task', TaskScreen::class)
             ->push('Task');
     });
 
-//Blog
+//Post
 Route::screen('post/{post?}', PostEditScreen::class)->name('platform.post.edit');//edit by id
 Route::screen('posts', PostListScreen::class)->name('platform.post.list'); //listing all posts in the db
-//Blog
+//Post

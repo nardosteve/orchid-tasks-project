@@ -17,7 +17,8 @@ class PostListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'posts' => Post::paginate()
+            //Query data from the DB and assign it to a key
+            'posts' => Post::filters()->defaultSort('id')->paginate()
         ];
     }
 
@@ -43,6 +44,7 @@ class PostListScreen extends Screen
      */
     public function commandBar(): iterable
     {
+        //Create button
         return [
             Link::make('Create new')
             ->icon('pencil')
@@ -58,6 +60,7 @@ class PostListScreen extends Screen
     public function layout(): iterable
     {
         return [
+            //Calling the table - get data from the DB
             PostListLayout::class
         ];
     }
